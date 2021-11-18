@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- camel-k: language=xml -->
+<!-- 
+    Run with:
+    kamel run rest-service.xml -d camel-jackson (dev mode)
+ -->
+<!-- <rests xmlns="http://camel.apache.org/schema/spring">
+    <rest>
+        <post id="processQuestions"
+              uri="/questions"
+		consumes="text/plain"
+		produces="text/plain">
+            
+            <param name="body" 
+                   type="body"
+                   required="true" 
+		    description="request data"/>
+
+	</post>
+    </rest>
+</rests> -->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://camel.apache.org/schema/spring"
+        xsi:schemaLocation="
+            http://camel.apache.org/schema/spring
+            http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<!--REST consumer to collect questions -->
+    <route id="consumer">
+	<from uri="rest:post:questions?consumes=application/json"/>
+        <log message="HELLO WORLD!"/>
+        <log message="${body}"/>
+
+	    <unmarshal>
+        	<json/>
+        </unmarshal>
+
+        <log message="1st arg: ${body[0]}"/>
+       	<log message="2nd arg: ${body[1]}"/>
+	    <log message="3rd arg: ${body[2]}"/>
+
+        <marshal>
+            <json/>
+        </marshal>
+
+    </route>
+
+</routes>
