@@ -1,7 +1,7 @@
 # simple-camelk-service
 Simple example of a CamelK service
 
-#Deploy service that takes an array
+**Deploy service that takes an array**
 
 To run/deploy, execute the following command from the `camelk` directory:
 ```
@@ -16,7 +16,7 @@ or the following `curl` command from the `camelk` directory:
 ```
 curl -X POST -H "content-type: application/json" -d "@data/array-payload.json" http://`oc get route rest-service -o jsonpath='{..spec.host}'`/questions
 ```
-#Deploy service that takes a complex object ("Cloud" service), from which the array used in the previous example is extracted
+**Deploy service that takes a complex object ("Cloud" service), from which the array used in the previous example is extracted**
 
 Deploy:
 ```
