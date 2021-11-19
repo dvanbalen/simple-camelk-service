@@ -4,21 +4,7 @@
     Run with:
     kamel run rest-service.xml -d camel-jackson (dev mode)
  -->
-<!-- <rests xmlns="http://camel.apache.org/schema/spring">
-    <rest>
-        <post id="processQuestions"
-              uri="/questions"
-		consumes="text/plain"
-		produces="text/plain">
-            
-            <param name="body" 
-                   type="body"
-                   required="true" 
-		    description="request data"/>
 
-	</post>
-    </rest>
-</rests> -->
 
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://camel.apache.org/schema/spring"
@@ -28,8 +14,7 @@
 
 	<!--REST consumer to collect questions -->
     <route id="consumer">
-	<from uri="rest:post:questions?consumes=application/json"/>
-        <log message="HELLO WORLD!"/>
+	<from uri="rest:post:/?consumes=application/json"/>
         <log message="${body}"/>
 
 	    <unmarshal>
