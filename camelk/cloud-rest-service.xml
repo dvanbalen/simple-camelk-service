@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- camel-k: language=xml -->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://camel.apache.org/schema/spring"
+        xsi:schemaLocation="
+            http://camel.apache.org/schema/spring
+            http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<!--REST consumer to collect questions -->
+    <route id="cloud-consumer">
+        <from uri="rest:post:cloudQuestions?consumes=application/json"/>
+        <!-- <log message="${body.getClass().getName()}"/> -->
+
+        <setBody>
+            <jsonpath>$.data</jsonpath>
+        </setBody>
+
+        <unmarshal>
+            <json/>
+        </unmarshal>
+        
+        <log message="${body.toString()}"/>
+
+        <log message="1st arg: ${body[0]}"/>
+        <log message="2nd arg: ${body[1]}"/>
+        <log message="3rd arg: ${body[2]}"/>
+
+        <marshal>
+            <json/>
+        </marshal>
+
+    </route>
+
+</routes>
